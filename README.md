@@ -1,5 +1,5 @@
 # xUnit.net v2 XML Format Schema Definition File
-Custom XML XSD (Schema Definition File) for the xUnit.net v2 XML Format.
+Custom XML XSD (Schema Definition File) for the <a href="https://xunit.net/docs/format-xml-v2" target="_blank">xUnit.net v2 XML Format</a> for the Unit Testing Framework <a href="https://xunit.net/" target="_blank">xunit.net</a>.
 
 
 # Notes
