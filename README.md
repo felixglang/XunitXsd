@@ -10,7 +10,7 @@ Custom XML XSD (Schema Definition File) for the xUnit.net v2 XML Format.
 
 # Documentation
 
-- <a href="Documentation/xunit_V2.0.html" target="_blank">XML Schema Definition Documentation</a>
+- <a href="Documentation/xunit_V2.0.pdf" target="_blank">XML Schema Definition Documentation</a>
 
   
 # Credits
