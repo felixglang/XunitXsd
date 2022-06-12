@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Felix Glang based on https://xunit.net/docs/format-xml-v2-->
+<!-- W3C Schema-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="assemblies">
+		<xs:annotation>
+			<xs:documentation>The assemblies element is the top-level element of the document.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="assembly" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="timestamp" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Start of the Xunit Execution</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="assembly">
+		<xs:annotation>
+			<xs:documentation>The assembly element contains information about the run of a single test assembly. This includes environmental information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="errors" minOccurs="0"/>
+				<xs:element ref="collection" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The fully qualified path name of the test assembly.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="config-file" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The fully qualified path name of the test assembly configuration file.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="test-framework" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The display name of the test framework that ran the tests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="environment" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The runtime environment in which the tests were run.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="run-date" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>The date when the test run started, in yyyy-mm-dd format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="run-time" type="xs:time" use="required">
+				<xs:annotation>
+					<xs:documentation>The time when the test run started, in 24-hour hh:mm:ss format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="time" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>The number of seconds the assembly run took, in decimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="total" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases run in the assembly.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="passed" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the assembly which passed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="failed" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the assembly which failed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="skipped" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the assembly that were skipped.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="errors" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of environmental errors experienced in the assembly.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="collection">
+		<xs:annotation>
+			<xs:documentation>The collection element contains information about the run of a single test collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="test"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the test collection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="time" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>The number of seconds the test collection run took, in decimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="total" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases run in the test collection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="passed" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the test collection which passed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="failed" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the test collection which failed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="skipped" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>The total number of test cases in the test collection that were skipped.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="error">
+		<xs:annotation>
+			<xs:documentation>The error element contains information about an environment failure that happened outside the scope of running a single unit test (for example, an exception thrown while disposing of a fixture object).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the item that caused the failure.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A code which indicates what kind of failure it is.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="errors">
+		<xs:annotation>
+			<xs:documentation>The errors element is a container for 0 or more error elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="error" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="failure">
+		<xs:annotation>
+			<xs:documentation>The failure element contains information a test failure.
+
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="message" minOccurs="0"/>
+				<xs:element ref="stack-trace" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="exception-type" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The fully qualified type name of the exception that caused the failure.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="message" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The failure message as a CDATA block.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="reason" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>For a skipped test, contains the reason text as a CDATA block.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="stack-trace" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The stack trace as a CDATA block.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="test">
+		<xs:annotation>
+			<xs:documentation>The test element contains information about the run of a single test.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="traits" minOccurs="0"/>
+					<xs:element ref="reason" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element ref="failure" minOccurs="0"/>
+			</xs:choice>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The display name of the test.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The fully qualified type name of the class that contained the test.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="method" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the method that contained the test.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="time" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>The number of seconds the test run took, in decimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="result" use="required">
+				<xs:annotation>
+					<xs:documentation>The result of the test. Valid values include Pass, Fail, and Skip.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Fail"/>
+						<xs:enumeration value="Pass"/>
+						<xs:enumeration value="Skip"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="trait">
+		<xs:annotation>
+			<xs:documentation>The trait element contains a single trait name/value pair.
+
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the trait</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="value" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The value of the trait</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="traits">
+		<xs:annotation>
+			<xs:documentation>The traits element is a container for 1 or more trait elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="trait" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
